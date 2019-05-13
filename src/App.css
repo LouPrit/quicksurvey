@@ -31,11 +31,6 @@ font-weight: bold
   width: 20vw;
 }
 
-.App-nav a {
-  text-decoration: none;
-  color: black;
-}
-
 .App-nav-login {
   display: flex;
   justify-content: space-between;
@@ -43,7 +38,12 @@ font-weight: bold
   width: 5.5vw;
 }
 
-.App-nav-login a {
+.App-nav li, .App-nav-login li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.link {
   text-decoration: none;
   color: black;
 }
@@ -53,4 +53,8 @@ font-weight: bold
   height: 90vh;
   margin: auto;
   background-color: orange;
+}
+
+p {
+  margin: 0;
 }
