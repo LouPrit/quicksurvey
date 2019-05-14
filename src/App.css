@@ -35,8 +35,12 @@ font-weight: bold
   display: flex;
   justify-content: space-between;
   padding: 0;
-  width: 5.5vw;
 }
+
+.signupLi {
+  margin-left: 1em;
+}
+
 
 .App-nav li, .App-nav-login li {
   text-decoration: none;

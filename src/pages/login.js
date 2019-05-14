@@ -1,16 +1,10 @@
 import React from "react";
 
-//components
-import MainNav from "../components/navigation"
-
 function LoginPage() {
     return (
-        <div className="App">
-            <MainNav />
             <div className="App-main">
-                <p>Login page</p>
+                <h1 id="heading">Log in to your account</h1>
             </div>
-        </div>
     );
 }
 

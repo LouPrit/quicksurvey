@@ -25,7 +25,7 @@ function MainNav() {
                     <li>
                         <Link className="link" to="/login">Login</Link>
                     </li>
-                    <li>
+                    <li className="signupLi">
                         <Link className="link" to="/signup">Signup</Link>
                     </li>
                 </ul>
