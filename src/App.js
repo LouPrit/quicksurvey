@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //pages
 import SignupPage from "./pages/signup";
@@ -18,14 +18,15 @@ class App extends Component {
     };
   }
 
+
   render() {
     return (
       <Router>
         <div className="App">
           <MainNav />
-        <Route path="/" exact component={MainPage} />
-        <Route path="/signup" component={SignupPage} />
-        <Route path="/login" component={LoginPage} />
+          <Route path="/" exact component={MainPage} />
+          <Route path="/signup" render={(props) => <SignupPage text="hello there" {...props} />} /> {/*Passing props to the 'SignupPage component, uses 'render' instead of 'component'*/}
+          <Route path="/login" component={LoginPage} />
         </div>
       </Router>
     );
