@@ -45,8 +45,13 @@ class SignupPage extends Component {
             .then((res) => {
                 let reply = res.data;
 
-                if (reply.user) {
-                    alert("Username or Email already registered");
+                if (reply.exists) {
+                    if (reply.username === this.state.accForm.username) {
+                        alert("Username already registered");
+                    }
+                    else if (reply.email === this.state.accForm.email) {
+                        alert("Email already registered");
+                    }
                 } else {
                 console.log("Account successfully created");
                 console.log(res)
