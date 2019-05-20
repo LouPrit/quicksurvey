@@ -31,9 +31,10 @@ mongoose.connect(`mongodb://${server}/${database}`, { useNewUrlParser: true })
 const accountSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, index: { unique: true } },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    creationDate: { type: String, required: true, default: '0' },
     loginAttempts: { type: Number, required: true, default: 0 },
     disabled: {type: Boolean, required: true, default: false}
 });
@@ -43,7 +44,7 @@ const accountSchema = new Schema({
  * This middleware is automatically ran whenever doc.save() is used (Called from the controller files)
  */
 accountSchema.pre('save', function(next) { //Registers this middleware for the doc.save() function
-    var user = this;
+    let user = this;
 
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) {
@@ -63,6 +64,17 @@ accountSchema.pre('save', function(next) { //Registers this middleware for the d
             next(); //Executes the next middleware
         });
     });
+});
+
+/** 
+ * Sets the creation date for our account
+ */
+accountSchema.pre('save', function(next) {
+    let user = this;
+    let today = new Date();
+
+    user.creationDate = today.toLocaleString('en-GB', { hour12: false });
+    next();
 });
 
 /**
