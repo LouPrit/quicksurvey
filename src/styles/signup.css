@@ -3,7 +3,7 @@ h1, h2 {
     margin: 0;
 }
 
-#heading {
+#signupHeading {
     padding-top: 10px;
 }
 
@@ -19,4 +19,17 @@ h1, h2 {
 input {
     padding: 10px;
     margin: 0.5em;
+}
+
+.nameSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+#firstName {
+    width: 45%;
+}
+
+#lastName {
+    width: 45%;
 }

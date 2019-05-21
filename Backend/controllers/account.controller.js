@@ -9,7 +9,7 @@ exports.createAccount = (req, res, next) => {
     accountModel.find({ $or: [{username: myAccount.username}, {email: myAccount.email}] }, function (err, user) { //Check to see if an account with provided username or email already exists
         if (err) return next(err);
 
-        if (user.length !== 0 ) { //'find' returns an array so check to see if it contains data (Found matching accounts already registered)
+        if (user.length !== 0 ) { //'accountModel.find' returns an array so check to see if it contains data (Found matching accounts already registered)
             const userObj = { //Create a object to send to frontend with basic details of existing account
                 exists: true,
                 username: user[0].username,

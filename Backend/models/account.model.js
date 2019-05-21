@@ -29,9 +29,9 @@ mongoose.connect(`mongodb://${server}/${database}`, { useNewUrlParser: true })
  * Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
  */
 const accountSchema = new Schema({
-    username: { type: String, required: true, index: { unique: true } },
+    username: { type: String, required: true, lowercase: true, index: { unique: true } },
     password: { type: String, required: true },
-    email: { type: String, required: true, index: { unique: true } },
+    email: { type: String, required: true, lowercase: true, index: { unique: true } },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     creationDate: { type: String, required: true, default: '0' },

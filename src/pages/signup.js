@@ -21,6 +21,10 @@ class SignupPage extends Component {
         this.createAccount = this.createAccount.bind(this);
     }
 
+    componentDidMount() {
+        document.title = "Signup for free!";
+    }
+
     textChanged(e) {
         const name = e.target.name;
         this.setState(
@@ -28,12 +32,6 @@ class SignupPage extends Component {
                 accForm: Object.assign({}, this.state.accForm, { [name]: e.target.value })
             }
         );
-    }
-
-
-    handleSubmit(e) {
-        e.preventDefault(); //Prevent the form from refreshing page when submit is pressed
-        alert(JSON.stringify(this.state.accForm));
     }
 
     /**
@@ -65,6 +63,7 @@ class SignupPage extends Component {
                     }
                 });
                 alert("Account successfully created");
+                window.location.assign("http://localhost:3000/login");
             }
             })
             .catch((error) => {
@@ -76,7 +75,7 @@ class SignupPage extends Component {
     render() {
         return (
             <div className="App-main">
-                <h1 id="heading">Create your free account</h1>
+                <h1 id="signupHeading">Create your free account</h1>
                 <h2>Already have account? <a href="login">Log In</a></h2>
 
                 <form className="signupForm" onSubmit={this.createAccount}>
@@ -84,8 +83,10 @@ class SignupPage extends Component {
                     <input type="text" name="username" placeholder="Username" onChange={this.textChanged} value={this.state.accForm.username} autoComplete="off" required />
                     <input type="password" name="password" placeholder="Password" onChange={this.textChanged} value={this.state.accForm.password} autoComplete="off" required />
                     <input type="email" name="email" placeholder="Email" onChange={this.textChanged} value={this.state.accForm.email} autoComplete="on" required />
-                    <input type="text" name="firstName" placeholder="First Name" onChange={this.textChanged} value={this.state.accForm.firstName} autoComplete="on" required />
-                    <input type="text" name="lastName" placeholder="Last Name" onChange={this.textChanged} value={this.state.accForm.lastName} autoComplete="on" required />
+                    <div className="nameSection">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" onChange={this.textChanged} value={this.state.accForm.firstName} autoComplete="on" required />
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" onChange={this.textChanged} value={this.state.accForm.lastName} autoComplete="on" required />
+                    </div>
                     <input type="submit" name="submit" value="Create Account" />
                 </form>
 

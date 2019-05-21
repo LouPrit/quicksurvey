@@ -1,0 +1,12 @@
+#loginHeading {
+    padding-top: 10px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    padding-top: 2em;
+    text-align: center;
+}
