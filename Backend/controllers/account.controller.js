@@ -1,4 +1,7 @@
 const accountModel = require('../models/account.model');
+const jwt = require('jsonwebtoken');
+
+const secret = "Secrets" //In a live envionment this would be declared in an Environmental Variable for security
 
 /**
  * Method to create a new user account
@@ -39,7 +42,7 @@ exports.authenticateUser = (req, res, next) => {
         if (err) return next(err);
         if (!user) { //If no user is returned from 'findOne' it returns a 'null', we handle that here.
         console.log(`No account found with username: ${username}`)
-            res.status(400).send("No account found");
+            res.status(200).send("No account found");
             return next();
         }
         let userDisabled = user.disabled;
@@ -48,6 +51,11 @@ exports.authenticateUser = (req, res, next) => {
             if (err) return next(err);
             //Executed if passwords match.
             if (isMatch) {
+                if (userDisabled) { //If user is disabled send JSON to show this
+                    console.log(`User: ${username} is disabled`);
+                    res.status(200).json({ disabled: true }); 
+                    return next();
+                }
                 //If login attempts are 3 or above and account is not currently disabled, set disabled to true and return the new updated user object to client ({new: true})
                 if (user.loginAttempts >= 3 && !userDisabled) {
                     accountModel.findOneAndUpdate({ username: username }, { $set: { disabled: true } }, {new: true}, function (err, data) {
@@ -61,12 +69,28 @@ exports.authenticateUser = (req, res, next) => {
                 if (user.loginAttempts > 0 && !userDisabled) {
                     accountModel.findOneAndUpdate({ username: username }, { $set: { loginAttempts: 0 } }, {new: true}, function (err, data) {
                         if (err) return next(err);
+                        //Create our token using jwt.sign
+                        let token = jwt.sign({username: username},
+                            secret,
+                            { expiresIn: '24h' // expires in 24 hours
+                            }
+                          );
                         console.log(`User ${username} found and passwords match`);
-                        res.status(200).json(data);
+                        //Send a JSON object including our token
+                        res.status(200).json({
+                            token: token
+                          });
                     });
-                } else { //Passwords match and failed login attempts are 0 or account is disabled so just send user account object.
+                } else { //Passwords match and failed login attempts are 0 so send a token
+                    let token = jwt.sign({username: username},
+                        secret,
+                        { expiresIn: '24h' // expires in 24 hours
+                        }
+                      );
                     console.log(`User ${username} found and passwords match`);
-                    res.status(200).json(user);
+                    res.status(200).json({
+                        token: token
+                      });
                 }
                 //If password provided doesn't match password in user account increase loginAttempts by 1 and return result of 'comparePassword' call.
             } else {

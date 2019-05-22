@@ -62,3 +62,12 @@ font-weight: bold
 p {
   margin: 0;
 }
+
+.logoutButton {
+  background:none!important;
+  color:inherit;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+}
