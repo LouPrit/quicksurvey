@@ -10,3 +10,8 @@
     padding-top: 2em;
     text-align: center;
 }
+
+.loginInput {
+    padding: 10px;
+    margin: 0.5em;
+}

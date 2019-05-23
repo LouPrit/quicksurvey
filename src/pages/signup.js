@@ -80,14 +80,14 @@ class SignupPage extends Component {
 
                 <form className="signupForm" onSubmit={this.createAccount}>
                     <p>~ Create an account ~</p>
-                    <input type="text" name="username" placeholder="Username" onChange={this.textChanged} value={this.state.accForm.username} autoComplete="off" required />
-                    <input type="password" name="password" placeholder="Password" onChange={this.textChanged} value={this.state.accForm.password} autoComplete="off" required />
-                    <input type="email" name="email" placeholder="Email" onChange={this.textChanged} value={this.state.accForm.email} autoComplete="on" required />
+                    <input className="signupInput" type="text" name="username" placeholder="Username" onChange={this.textChanged} value={this.state.accForm.username} autoComplete="off" required />
+                    <input className="signupInput" type="password" name="password" placeholder="Password" onChange={this.textChanged} value={this.state.accForm.password} autoComplete="off" required />
+                    <input className="signupInput" type="email" name="email" placeholder="Email" onChange={this.textChanged} value={this.state.accForm.email} autoComplete="on" required />
                     <div className="nameSection">
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name" onChange={this.textChanged} value={this.state.accForm.firstName} autoComplete="on" required />
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" onChange={this.textChanged} value={this.state.accForm.lastName} autoComplete="on" required />
+                    <input className="signupInput" type="text" id="firstName" name="firstName" placeholder="First Name" onChange={this.textChanged} value={this.state.accForm.firstName} autoComplete="on" required />
+                    <input className="signupInput" type="text" id="lastName" name="lastName" placeholder="Last Name" onChange={this.textChanged} value={this.state.accForm.lastName} autoComplete="on" required />
                     </div>
-                    <input type="submit" name="submit" value="Create Account" />
+                    <input className="signupInput btn btn-dark" type="submit" name="submit" value="Create Account" />
                 </form>
 
             </div>

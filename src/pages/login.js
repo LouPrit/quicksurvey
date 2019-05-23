@@ -83,9 +83,9 @@ class LoginPage extends Component {
 
                 <form className="loginForm" onSubmit={this.login}>
                     <p>~ Log in~</p>
-                    <input type="text" name="username" placeholder="Username" onChange={this.textChanged} value={this.state.loginForm.username} autoComplete="off" required />
-                    <input type="password" name="password" placeholder="Password" onChange={this.textChanged} value={this.state.loginForm.password} autoComplete="off" required />
-                    <input type="submit" name="submit" value="Log in" />
+                    <input className="loginInput" type="text" name="username" placeholder="Username" onChange={this.textChanged} value={this.state.loginForm.username} autoComplete="off" required />
+                    <input className="loginInput" type="password" name="password" placeholder="Password" onChange={this.textChanged} value={this.state.loginForm.password} autoComplete="off" required />
+                    <input className="loginInput btn btn-dark" type="submit" name="submit" value="Log in" />
                 </form>
 
             </div>
