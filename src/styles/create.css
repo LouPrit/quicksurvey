@@ -1,0 +1,32 @@
+.createHeading {
+    padding: 10px 0 10px 0;
+}
+
+.createSurveyMain {
+    margin: auto;
+    min-height: 45vh;
+    width: 49vw;
+    border: solid;
+    border-width: 1.5px;
+    border-radius: 10px;
+}
+
+.createSurveyForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#titleDiv {
+    display: flex;
+    flex-direction: column;
+    outline: solid;
+    margin: auto;
+}
+
+#titleInput {
+    width: 35vw;
+    padding: 10px;
+}
+
+
+

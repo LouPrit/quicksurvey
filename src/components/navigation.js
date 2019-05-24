@@ -17,7 +17,7 @@ function MainNav(props) {
                         <Link className="link" to="/mysurveys">My Surveys</Link>
                     </li>
                     <li>
-                        <Link className="link" to="/createsurvey">Create Surveys</Link>
+                        <Link className="link" to="/create">Create Surveys</Link>
                     </li>
                 </ul>
             </nav>
@@ -45,7 +45,7 @@ function MainNav(props) {
                             <Link className="link" to="/mysurveys">My Surveys</Link>
                         </li>
                         <li>
-                            <Link className="link" to="/createsurvey">Create Surveys</Link>
+                            <Link className="link" to="/create">Create Surveys</Link>
                         </li>
                     </ul>
                 </nav>

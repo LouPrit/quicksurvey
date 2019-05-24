@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import decode from 'jwt-decode'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import decode from 'jwt-decode';
 
 //pages
 import SignupPage from "./pages/signup";
-import MainPage from "./pages/index"
-import LoginPage from "./pages/login"
+import MainPage from "./pages/index";
+import LoginPage from "./pages/login";
+import CreatePage from "./pages/create";
+import MySurveysPage from "./pages/mysurveys"
+import NotFound from "./pages/notfound";
 
 //components
 import MainNav from "./components/navigation"
@@ -62,12 +65,19 @@ verifyToken() {
   render() {
     return (
       <Router>
+        <Switch>
         <div className="App">
           <MainNav logState={this.state.status}/>
+          <Switch>
           <Route path="/" exact component={MainPage} />
-          <Route path="/signup" render={(props) => <SignupPage text="hello there" {...props} />} /> {/*Passing props to the 'SignupPage component, uses 'render' instead of 'component'*/}
+          <Route path="/mysurveys" render={(props) => <MySurveysPage  {...props} />} />
+          <Route path="/create" render={(props) => <CreatePage  {...props} />} />
+          <Route path="/signup" render={(props) => <SignupPage  {...props} />} /> {/*Passing props to the 'SignupPage component, uses 'render' instead of 'component'*/}
           <Route path="/login" render={(props) => <LoginPage setLogInState={this.setLogInState} {...props} />} />
+          <Route path="*" component={NotFound} /> {/*Catches any routes that don't match the above and sends them to the NotFound page*/}
+          </Switch>
         </div>
+        </Switch>
       </Router>
     );
   }
