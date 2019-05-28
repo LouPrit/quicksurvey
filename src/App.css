@@ -56,7 +56,7 @@ font-weight: bold
 
 .App-main {
   width: 50vw;
-  height: 90vh;
+  min-height: 90vh;
   margin: auto;
   background-color: orange;
 }

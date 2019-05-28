@@ -16,17 +16,38 @@
     flex-direction: column;
 }
 
-#titleDiv {
+
+#titleDiv, #optionsDiv, #descriptionDiv, #quesDiv {
     display: flex;
     flex-direction: column;
-    outline: solid;
-    margin: auto;
+    margin: 1rem auto 0 auto;
 }
 
-#titleInput {
+#titleInput ,#optionsInput, #descriptionInput, #quesInput {
     width: 35vw;
     padding: 10px;
+    border-radius: 5px;
 }
 
+.questionDiv {
+    display: flex;
+    flex-direction: column;
+    min-height: 20vh;
+    width: 45vw;
+    margin: 3rem auto 1rem auto;
+}
 
+.insideQuestionDiv {
+    display: flex;
+    flex-direction: column;
+    min-height: 24vh;
+    width: 45vw;
+    border: solid;
+    border-width: 1.5px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 
+#plusIcon {
+    align-self: center;
+}

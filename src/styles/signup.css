@@ -19,6 +19,7 @@ h1, h2 {
 .signupInput {
     padding: 10px;
     margin: 0.5em;
+    border-radius: 5px;
 }
 
 .nameSection {
