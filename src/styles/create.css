@@ -23,7 +23,7 @@
     margin: 1rem auto 0 auto;
 }
 
-#titleInput ,#optionsInput, #descriptionInput, #quesInput {
+#titleInput ,.optionsInput, #descriptionInput, .quesInput {
     width: 35vw;
     padding: 10px;
     border-radius: 5px;
@@ -50,4 +50,24 @@
 
 #plusIcon {
     align-self: center;
+}
+
+.questionList {
+    margin: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.shrinkAnchorPlus {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 3px;
+    align-self: flex-start;
+}
+
+.shrinkAnchorMinus {
+    height: 30px;
+    width: 30px;
+    align-self: flex-end;
+    position: absolute;
 }

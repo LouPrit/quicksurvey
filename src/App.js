@@ -65,19 +65,17 @@ verifyToken() {
   render() {
     return (
       <Router>
-        <Switch>
         <div className="App">
           <MainNav logState={this.state.status}/>
           <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/mysurveys" render={(props) => <MySurveysPage  {...props} />} />
-          <Route path="/create" render={(props) => <CreatePage  {...props} />} />
+          <Route path="/create" render={(props) => <CreatePage status={this.state.status} {...props} />} />
           <Route path="/signup" render={(props) => <SignupPage  {...props} />} /> {/*Passing props to the 'SignupPage component, uses 'render' instead of 'component'*/}
           <Route path="/login" render={(props) => <LoginPage setLogInState={this.setLogInState} {...props} />} />
           <Route path="*" component={NotFound} /> {/*Catches any routes that don't match the above and sends them to the NotFound page*/}
           </Switch>
         </div>
-        </Switch>
       </Router>
     );
   }

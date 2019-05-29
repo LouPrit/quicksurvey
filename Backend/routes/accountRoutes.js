@@ -3,7 +3,7 @@ const router = express.Router();
 const accountController = require('../controllers/account.controller');
 
 /**
- * Handles POST requests to /account/
+ * Handles POST requests to /account/ for account creation
  */
 router.post("/", accountController.createAccount);
 
