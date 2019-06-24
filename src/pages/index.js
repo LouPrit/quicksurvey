@@ -3,6 +3,7 @@ import '../styles/index.css';
 
 const survObj = {
     title: "Survey 1",
+    description: "My description",
     id: 1,
     user: "kingsolos",
     survey: [{
@@ -50,6 +51,8 @@ function MainPage() {
     return (
         <div className="App-main">
             <form className="surveyForm">
+                <h1>{survObj.title}</h1>
+                <p>{survObj.description}</p>
                 <Section />
                 <input type="submit" className="surveyButton btn btn-dark" value="Submit" />
             </form>

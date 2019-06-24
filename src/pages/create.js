@@ -12,8 +12,8 @@ class CreatePage extends Component {
             id: Date.now(), //Provides us with a unique ID as Date.now returns the milliseconds since January 1, 1970 00:00:00
             questions: [
                 {
-                    type: 'radio',
                     id: 0,
+                    type: 'radio',
                     question: '',
                     options: ''
                 }
@@ -48,7 +48,7 @@ class CreatePage extends Component {
             );
         } else { //not title or description so must be inside question or options box
             let questionsCopy = JSON.parse(JSON.stringify(this.state.questions)); //Clone a complete copy of the 'questions' array from State
-            //Add the text the user typed into the questionsCopy object, used the id and name
+            //Add the text the user typed into the questionsCopy object, using the id and name
             questionsCopy[questionsCopy.findIndex(i => i.id === id)][name] = e.target.value;
             //Set the state to our newly altered questions object.
             this.setState(
@@ -69,8 +69,8 @@ class CreatePage extends Component {
                 questions: [
                     ...this.state.questions,
                     {
+                        id: Date.now(),
                         type: 'radio',
-                        id: this.state.questions.length,
                         question: '',
                         options: ''
                     }
