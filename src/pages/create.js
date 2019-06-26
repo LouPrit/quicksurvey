@@ -46,11 +46,21 @@ class CreatePage extends Component {
                     [name]: e.target.value
                 }
             );
-        } else { //not title or description so must be inside question or options box
+            //If we are typing inside question or options field do this 
+        } else if (name === "question" || name === "options") {
             let questionsCopy = JSON.parse(JSON.stringify(this.state.questions)); //Clone a complete copy of the 'questions' array from State
             //Add the text the user typed into the questionsCopy object, using the id and name
             questionsCopy[questionsCopy.findIndex(i => i.id === id)][name] = e.target.value;
             //Set the state to our newly altered questions object.
+            this.setState(
+                {
+                    questions: questionsCopy
+                }
+            );
+            //If none of the others match, the user can only be changing the question type (radio/checkbox).. handle that here.
+        } else {
+            let questionsCopy = JSON.parse(JSON.stringify(this.state.questions));
+            questionsCopy[questionsCopy.findIndex(i => i.id === id)]["type"] = e.target.value;
             this.setState(
                 {
                     questions: questionsCopy
@@ -89,6 +99,10 @@ class CreatePage extends Component {
                 <a href=" " onClick={this.removeQuestion} className="shrinkAnchorMinus">
                     <i className="far fa-minus-square fa-2x" id={id}></i>
                 </a>
+                <div className="questionType" onChange={this.textChanged} >
+                    <label><input type="radio" name={id} id={id} value="radio" defaultChecked="true" /> Radio</label>
+                    <label><input type="radio" name={id} id={id} value="checkbox" /> Checkbox</label>
+                </div>
                 <div id='quesDiv'>
                     <label id='#quesLabel'>Question: </label>
                     <input type='text' id={id} name="question" className='quesInput' placeholder='Question' onChange={this.textChanged} />

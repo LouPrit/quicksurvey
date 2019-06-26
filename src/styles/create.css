@@ -40,7 +40,7 @@
 .insideQuestionDiv {
     display: flex;
     flex-direction: column;
-    min-height: 24vh;
+    min-height: 32vh;
     width: 45vw;
     border: solid;
     border-width: 1.5px;
@@ -70,4 +70,10 @@
     width: 30px;
     align-self: flex-end;
     position: absolute;
+}
+
+.questionType {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto 0 auto;
 }
