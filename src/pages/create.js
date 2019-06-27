@@ -100,15 +100,16 @@ class CreatePage extends Component {
                     <i className="far fa-minus-square fa-2x" id={id}></i>
                 </a>
                 <div className="questionType" onChange={this.textChanged} >
-                    <label><input type="radio" name={id} id={id} value="radio" defaultChecked="true" /> Radio</label>
-                    <label><input type="radio" name={id} id={id} value="checkbox" /> Checkbox</label>
+                    <p className="boldLabel">Option style:</p>
+                    <label><input type="radio" name={id} id={id} value="radio" defaultChecked="true" /> Radio (Only one option can be chosen)</label>
+                    <label><input type="radio" name={id} id={id} value="checkbox" /> Checkbox (Multiple opttions can be chosen)</label>
                 </div>
                 <div id='quesDiv'>
-                    <label id='#quesLabel'>Question: </label>
+                    <label id='#quesLabel' className="boldLabel">Question: </label>
                     <input type='text' id={id} name="question" className='quesInput' placeholder='Question' onChange={this.textChanged} />
                 </div>
                 <div id='optionsDiv'>
-                    <label id='#optionsLabel'>Options:</label>
+                    <label id='#optionsLabel' className="boldLabel">Options:</label>
                     <input type='text' id={id} name="options" className='optionsInput' placeholder='Comma seperated e.g. (Option 1, Option 2)' onChange={this.textChanged} />
                 </div>
             </li>
@@ -156,11 +157,11 @@ class CreatePage extends Component {
                 <div className='createSurveyMain'>
                     <form className='createSurveyForm'>
                         <div id='titleDiv'>
-                            <label id='#titleLabel'>Survey title:</label>
+                            <label id='#titleLabel' className="boldLabel">Survey title:</label>
                             <input type='text' name="title" id='titleInput' placeholder='Survey Title' onChange={this.textChanged} />
                         </div>
                         <div id='descriptionDiv'>
-                            <label id='#descriptionLabel'>Description:</label>
+                            <label id='#descriptionLabel' className="boldLabel">Description:</label>
                             <input type='text' name="description" id='descriptionInput' placeholder='Description' onChange={this.textChanged} />
                         </div>
                         <div className="questionDiv">

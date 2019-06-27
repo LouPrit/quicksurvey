@@ -75,5 +75,11 @@
 .questionType {
     display: flex;
     flex-direction: column;
-    margin: 1rem auto 0 auto;
+    margin: 0.75rem auto 0 auto;
+    width: 35vw;
+}
+
+.boldLabel {
+    font-weight: bold;
+    margin: 0;
 }
