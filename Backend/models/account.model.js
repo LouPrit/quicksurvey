@@ -8,7 +8,7 @@ const SALT_WORK_FACTOR = 10;
  * Connection settings
  */
 const server = 'localhost:27017';
-const database = 'accounts';
+const database = 'master';
 
 
 /**
@@ -16,7 +16,7 @@ const database = 'accounts';
  */
 console.log(`Attempting to connect to the database...`);
 mongoose.connect(`mongodb://${server}/${database}`, { useNewUrlParser: true })
-    .then(() => console.log("Connected to database"))
+    .then(() => console.log("Connected to master database"))
     .catch(error => {
         console.log(`Couldn't connect to the database: \n${error}`);
         process.exit();
@@ -89,7 +89,7 @@ accountSchema.methods.comparePassword = function(candidatePassword, cb) {
 };
 
 /**
- * Convert our notesSchema into a Model we can use and exports it.
+ * Convert our notesSchema into a Model we can use and exports it (Creates a collection in the 'Master' database called 'accounts').
  * Models are fancy constructors compiled from Schema definitions and are responsible for creating and reading documents from the underlying MongoDB database.
  */
-module.exports = mongoose.model('Account', accountSchema);
+module.exports = mongoose.model('Account', accountSchema, 'accounts');

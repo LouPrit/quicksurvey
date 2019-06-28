@@ -13,7 +13,7 @@ class CreatePage extends Component {
             questions: [
                 {
                     id: 0,
-                    type: 'radio',
+                    quesType: 'radio',
                     question: '',
                     options: ''
                 }
@@ -60,7 +60,7 @@ class CreatePage extends Component {
             //If none of the others match, the user can only be changing the question type (radio/checkbox).. handle that here.
         } else {
             let questionsCopy = JSON.parse(JSON.stringify(this.state.questions));
-            questionsCopy[questionsCopy.findIndex(i => i.id === id)]["type"] = e.target.value;
+            questionsCopy[questionsCopy.findIndex(i => i.id === id)]["quesType"] = e.target.value;
             this.setState(
                 {
                     questions: questionsCopy
@@ -80,7 +80,7 @@ class CreatePage extends Component {
                     ...this.state.questions,
                     {
                         id: Date.now(),
-                        type: 'radio',
+                        quesType: 'radio',
                         question: '',
                         options: ''
                     }
@@ -100,7 +100,7 @@ class CreatePage extends Component {
                     <i className="far fa-minus-square fa-2x" id={id}></i>
                 </a>
                 <div className="questionType" onChange={this.textChanged} >
-                    <p className="boldLabel">Option style:</p>
+                    <p className="boldLabel">Style:</p>
                     <label><input type="radio" name={id} id={id} value="radio" defaultChecked="true" /> Radio (Only one option can be chosen)</label>
                     <label><input type="radio" name={id} id={id} value="checkbox" /> Checkbox (Multiple opttions can be chosen)</label>
                 </div>
@@ -144,7 +144,7 @@ class CreatePage extends Component {
         }
     }
 
-    //Test, currently displays what is in state.
+    //Posts the survey object to the database
     saveSurvey(e) {
         e.preventDefault();
         alert(JSON.stringify(this.state));
