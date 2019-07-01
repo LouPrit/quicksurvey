@@ -63,7 +63,7 @@ class LoginPage extends Component {
                                 password: ''
                             }
                         });
-                        window.location.assign("http://localhost:3000/mysurveys");
+                        window.location.assign("http://localhost:3000/");
                     } else {
                         console.log("Error: Looks like token was invalid");
                     }

@@ -9,12 +9,13 @@ const Schema = mongoose.Schema;
 const surveySchema = new Schema({
     title: { type: String, required: true},
     description: { type: String, required: true },
+    username: {type: String, required: true },
     id: { type: Number, required: true },
     questions: [{
-        id: Number,
-        quesType: String,
-        question: String,
-        options: String
+        id: {type: Number, required: true},
+        quesType: {type: String, required: true},
+        question: {type: String, required: true},
+        options: {type: String, required: true}
     }]
 });
 

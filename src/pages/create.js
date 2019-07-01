@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/create.css';
-
+import axios from 'axios';
 
 class CreatePage extends Component {
     constructor(props) {
@@ -9,6 +9,7 @@ class CreatePage extends Component {
         this.state = {
             title: '',
             description: '',
+            username: props.username,
             id: Date.now(), //Provides us with a unique ID as Date.now returns the milliseconds since January 1, 1970 00:00:00
             questions: [
                 {
@@ -106,11 +107,11 @@ class CreatePage extends Component {
                 </div>
                 <div id='quesDiv'>
                     <label id='#quesLabel' className="boldLabel">Question: </label>
-                    <input type='text' id={id} name="question" className='quesInput' placeholder='Question' onChange={this.textChanged} />
+                    <input type='text' id={id} name="question" className='quesInput' placeholder='Question' onChange={this.textChanged} required={true} />
                 </div>
                 <div id='optionsDiv'>
                     <label id='#optionsLabel' className="boldLabel">Options:</label>
-                    <input type='text' id={id} name="options" className='optionsInput' placeholder='Comma seperated e.g. (Option 1, Option 2)' onChange={this.textChanged} />
+                    <input type='text' id={id} name="options" className='optionsInput' placeholder='Comma seperated e.g. (Option 1, Option 2)' onChange={this.textChanged} required={true} />
                 </div>
             </li>
         );
@@ -147,22 +148,48 @@ class CreatePage extends Component {
     //Posts the survey object to the database
     saveSurvey(e) {
         e.preventDefault();
-        alert(JSON.stringify(this.state));
+        axios.post('http://localhost:3001/survey/', (this.state))
+        .then(reply => 
+            {
+            alert("Survey saved!");
+            document.getElementById("myForm").reset();
+            this.setState(
+                {
+                    title: '',
+                    description: '',
+                    username: this.props.username,
+                    id: Date.now(), //Provides us with a unique ID as Date.now returns the milliseconds since January 1, 1970 00:00:00
+                    questions: [
+                        {
+                            id: 0,
+                            quesType: 'radio',
+                            question: '',
+                            options: ''
+                        }
+                    ]
+                } 
+            );
+            }
+        ).catch((error) => {
+            console.error(error);
+            alert("Failed to save survey!");
+        });
     }
 
+    //The render method for the page
     render() {
-        return (
+        return(
             <div className='App-main'>
                 <h1 className='createHeading'>Create a survey</h1>
                 <div className='createSurveyMain'>
-                    <form className='createSurveyForm'>
+                    <form id="myForm" className='createSurveyForm'>
                         <div id='titleDiv'>
                             <label id='#titleLabel' className="boldLabel">Survey title:</label>
-                            <input type='text' name="title" id='titleInput' placeholder='Survey Title' onChange={this.textChanged} />
+                            <input type='text' name="title" id='titleInput' placeholder='Survey Title' onChange={this.textChanged} required={true} />
                         </div>
                         <div id='descriptionDiv'>
                             <label id='#descriptionLabel' className="boldLabel">Description:</label>
-                            <input type='text' name="description" id='descriptionInput' placeholder='Description' onChange={this.textChanged} />
+                            <input type='text' name="description" id='descriptionInput' placeholder='Description' onChange={this.textChanged} required={true} />
                         </div>
                         <div className="questionDiv">
                             <a href=' ' onClick={this.addQuestion} className="shrinkAnchorPlus">
@@ -172,8 +199,8 @@ class CreatePage extends Component {
                                 <this.Question />
                             </ul>
                         </div>
+                        <button type="submit" onClick={this.saveSurvey}>Test</button>
                     </form>
-                    <button onClick={this.saveSurvey}>Test</button>
                 </div>
             </div>
         );
