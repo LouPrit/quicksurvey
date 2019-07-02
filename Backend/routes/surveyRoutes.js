@@ -8,8 +8,8 @@ const surveyController = require('../controllers/survey.controller');
 router.post("/", surveyController.createSurvey);
 
 /**
- * Handles GET requests to /account/USERNAME/PASSWORD - This is for user authentication
+ * Handles GET requests to /survey/USERNAME for survey retrieval
  */
-// router.get("/:user/:pass", accountController.authenticateUser);
+router.get("/:user", surveyController.getSurveys);
 
 module.exports = router;

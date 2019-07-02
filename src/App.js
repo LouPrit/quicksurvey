@@ -70,7 +70,7 @@ verifyToken() {
           <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/mysurveys" render={(props) =>(
-          this.state.status.loggedIn ? ( <MySurveysPage  {...props} /> )
+          this.state.status.loggedIn ? ( <MySurveysPage username={this.state.status.username} {...props} /> )
           : (<Redirect to='/login' />)
           )} />
           <Route path="/create" render={(props) =>(

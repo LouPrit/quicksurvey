@@ -171,8 +171,7 @@ class CreatePage extends Component {
             );
             }
         ).catch((error) => {
-            console.error(error);
-            alert("Failed to save survey!");
+            alert("Failed");
         });
     }
 
@@ -182,7 +181,7 @@ class CreatePage extends Component {
             <div className='App-main'>
                 <h1 className='createHeading'>Create a survey</h1>
                 <div className='createSurveyMain'>
-                    <form id="myForm" className='createSurveyForm'>
+                    <form id="myForm" className='createSurveyForm' onSubmit={this.saveSurvey}>
                         <div id='titleDiv'>
                             <label id='#titleLabel' className="boldLabel">Survey title:</label>
                             <input type='text' name="title" id='titleInput' placeholder='Survey Title' onChange={this.textChanged} required={true} />
@@ -199,7 +198,7 @@ class CreatePage extends Component {
                                 <this.Question />
                             </ul>
                         </div>
-                        <button type="submit" onClick={this.saveSurvey}>Test</button>
+                        <button type="submit" className="loginInput btn btn-dark">Save Survey</button>
                     </form>
                 </div>
             </div>
