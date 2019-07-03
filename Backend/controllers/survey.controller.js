@@ -17,10 +17,7 @@ exports.createSurvey = (req, res, next) => {
  */
 exports.getSurveys = (req, res, next) => {
     surveyModel.find({ username: req.params.user }, function (err, surveys) {
-        if (surveys.length > 0) {
-            res.status(200).send(surveys)
-        } else {
-            res.status(200).send("No surveys found");
-        }
+        if (err) return next(err);
+            res.status(200).send(surveys); //surveys will either contain a list of surveys if they were found, or will send an empty array.
     });
 }
