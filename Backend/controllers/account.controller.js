@@ -1,7 +1,7 @@
 const accountModel = require('../models/account.model');
 const jwt = require('jsonwebtoken');
 
-const secret = "Secrets" //In a live envionment this would be declared in an Environmental Variable for security
+const secret = "Secrets" //Used in signing of the JWT - In a live environment this should ALWAYS be stored in an environmental variable for security
 
 /**
  * Method to create a new user account

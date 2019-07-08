@@ -3,7 +3,7 @@ import '../styles/mysurveys.css';
 import axios from 'axios';
 
 
-class MySurveysPage extends Component {
+class MySurveysPage extends Component { //Username is passed to this component from 'App.js'
     constructor(props) {
         super(props);
 
@@ -19,7 +19,9 @@ class MySurveysPage extends Component {
 
     componentDidMount() {
         document.title = "My Surveys";
-        axios.get(`http://localhost:3001/survey/${this.props.username}`)
+
+        const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
+        axios.get(`http://localhost:3001/survey/${this.props.username}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request sending our authorization header
             .then(reply => this.setState(
                 {
                     retrievedData: true,
