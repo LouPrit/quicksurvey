@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/mysurveys.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 class MySurveysPage extends Component { //Username is passed to this component from 'App.js'
@@ -13,7 +14,6 @@ class MySurveysPage extends Component { //Username is passed to this component f
         };
 
         this.SurveyList = this.SurveyList.bind(this);
-        this.test = this.test.bind(this);
     }
 
 
@@ -45,13 +45,9 @@ class MySurveysPage extends Component { //Username is passed to this component f
             );
         } else {
             return (
-                this.state.surveys.map((survey, index) => <li key={index} className="buttonList"><button className="survListButt" id={index} onClick={this.test}>{survey.title}</button></li>)
+                this.state.surveys.map((survey, index) => <li key={index} className="buttonList"><Link className="survListButt btn btn-dark" to={`/viewsurvey/?id=${survey.id}`}>{survey.title}</Link></li>)
             );
         }
-    }
-
-    test = (e) => {
-        console.log(this.state.surveys[e.target.getAttribute('id')]);
     }
 
 

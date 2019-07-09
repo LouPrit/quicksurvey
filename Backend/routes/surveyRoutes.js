@@ -31,6 +31,11 @@ router.post("/", checkToken, surveyController.createSurvey);
  */
 router.get("/:user", checkToken, surveyController.getSurveys);
 
+/**
+ * Handles GET requests to /survey/USERNAME/ID for specific survey retrieval - PROTECTED ROUTE
+ */
+router.get("/:user/:id", checkToken, surveyController.getSpecificSurvey);
+
 
 
 module.exports = router;
