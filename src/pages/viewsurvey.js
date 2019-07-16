@@ -21,9 +21,30 @@ class ViewSurveys extends Component { //Username is passed to this component fro
 
         const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
         axios.get(`http://localhost:3001/survey/${this.props.username}/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request sending our authorization header
-            .then(data => this.setState(
-                data.data[0]
-            ))
+            .then(data => {
+
+                let newState = JSON.parse(JSON.stringify(data.data[0])); //Assign our data returned from the GET request to a variable 
+                let questionObj = JSON.parse(JSON.stringify(data.data[0].questions)); //Assign the 'questions' key data from our data
+                let answers = []; //Empty array where our questions and answers will be pushed
+
+                //Iterate through questions and push new objects into 'answers' array
+                questionObj.map(item => answers.push(
+                    {
+                        'question': item.question,
+                        'options': item.options.split(', ').map(option => ({ option: option, 'value': false }))
+                    }
+                ));
+                /**
+                 * In the 'newState' object, assign a new key called 'answers' and give it the value of ours 'answers' array,
+                 * this is used for detecting user input on forms.
+                 */
+                newState.answers = answers;
+
+                //Set state to our newState object.
+                this.setState(
+                    newState
+                );
+            })
             .catch(error => console.log(error));
     }
 
@@ -55,7 +76,7 @@ class ViewSurveys extends Component { //Username is passed to this component fro
  * @param {*} props Props passed from 'Section' function to this function
  */
     CreateOptions(props) {
-        return (this.state.questions[props.index].options.split(', ').map((item, index) => <div className="surveyDiv" key={props.index + index}><label className="surveyLabel" >{item}</label><input className="surveyInput" type={props.type} name={props.index} /></div>));
+        return (this.state.questions[props.index].options.split(', ').map((item, index) => <div className="surveyDiv" key={props.index + index}><label className="surveyLabel" >{item}</label><input className="surveyInput" type={props.type} name={props.index} value={item} /></div>));
     }
 
     render() {
@@ -64,6 +85,7 @@ class ViewSurveys extends Component { //Username is passed to this component fro
                 <h1 id="title">{this.state.title}</h1>
                 <p id="descript">{this.state.description}</p>
                 <this.section />
+                <button onClick={this.test.bind(this)}>Test</button>
             </div>
 
         );
