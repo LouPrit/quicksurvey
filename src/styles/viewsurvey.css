@@ -52,8 +52,13 @@
     font-weight: bold;
 }
 
-.surveyButton {
+#surveyForm {
+    text-align: center;
+}
+
+#surveyButton {
     padding: 10px;
-    margin: 0.5em;
-    width: 15vw;
+    margin: 0.5vh;
+    width: 35%;
+    text-align: center;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/viewsurvey.css';
 import axios from 'axios';
+import $ from 'jquery';
 
 
 class ViewSurveys extends Component { //Username is passed to this component from 'App.js'
@@ -22,34 +23,11 @@ class ViewSurveys extends Component { //Username is passed to this component fro
         const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
         axios.get(`http://localhost:3001/survey/${this.props.username}/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request sending our authorization header
             .then(data => {
-
-                let newState = JSON.parse(JSON.stringify(data.data[0])); //Assign our data returned from the GET request to a variable 
-                let questionObj = JSON.parse(JSON.stringify(data.data[0].questions)); //Assign the 'questions' key data from our data
-                let answers = []; //Empty array where our questions and answers will be pushed
-
-                //Iterate through questions and push new objects into 'answers' array
-                questionObj.map(item => answers.push(
-                    {
-                        'question': item.question,
-                        'options': item.options.split(', ').map(option => ({ option: option, 'value': false }))
-                    }
-                ));
-                /**
-                 * In the 'newState' object, assign a new key called 'answers' and give it the value of ours 'answers' array,
-                 * this is used for detecting user input on forms.
-                 */
-                newState.answers = answers;
-
-                //Set state to our newState object.
                 this.setState(
-                    newState
+                    data.data[0]
                 );
             })
             .catch(error => console.log(error));
-    }
-
-    test() {
-        console.log(JSON.stringify(this.state));
     }
 
     /**
@@ -61,10 +39,11 @@ class ViewSurveys extends Component { //Username is passed to this component fro
                 this.state.questions.map((item, index) =>
                     <div key={index} className="surveySection">
                         <h1 className="sectionTitle">{item.question}</h1>
-                        <form className="formSection">
-                            <this.CreateOptions index={index} type={item.quesType} />
-                        </form>
-                    </div>)
+                        <div className="formSection">
+                            <this.CreateOptions sectionindex={index} type={item.quesType} question={item.question} />
+                        </div>
+                    </div>
+                )
             );
         } else {
             return (<h1>Loading...</h1>);
@@ -76,7 +55,29 @@ class ViewSurveys extends Component { //Username is passed to this component fro
  * @param {*} props Props passed from 'Section' function to this function
  */
     CreateOptions(props) {
-        return (this.state.questions[props.index].options.split(', ').map((item, index) => <div className="surveyDiv" key={props.index + index}><label className="surveyLabel" >{item}</label><input className="surveyInput" type={props.type} name={props.index} value={item} /></div>));
+        return (this.state.questions[props.sectionindex].options.split(', ').map((item, index) =>
+            <div className="surveyDiv" key={props.sectionindex + index}>
+                <label className="surveyLabel" >{item}</label>
+                <input className="surveyInput" type={props.type} name={props.question} value={item} />
+            </div>
+        ));
+    }
+
+    /**
+     * Uses JQuery to convert the user input on the form into a JSON object that can be used.
+     * @param {*} e - Event passed from button.
+     */
+    formToJSON(e) {
+        e.preventDefault();
+
+        const id = this.state.id;
+
+        let formData = $("#surveyForm").serializeArray(); //Use JQuery to encode a set of form elements as an array of names and values.
+        formData.unshift({ id: id }); //Add new 'id' object to our array
+
+        const finalFormData = JSON.stringify(formData); //Convert our array into a JSON object.
+
+        console.log(JSON.stringify(finalFormData));
     }
 
     render() {
@@ -84,8 +85,10 @@ class ViewSurveys extends Component { //Username is passed to this component fro
             <div className="App-main">
                 <h1 id="title">{this.state.title}</h1>
                 <p id="descript">{this.state.description}</p>
-                <this.section />
-                <button onClick={this.test.bind(this)}>Test</button>
+                <form onSubmit={this.formToJSON.bind(this)} id="surveyForm">
+                    <this.section />
+                    <button type="submit" id="surveyButton" className="btn btn-dark" >Submit</button>
+                </form>
             </div>
 
         );
