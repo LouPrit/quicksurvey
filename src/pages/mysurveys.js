@@ -45,7 +45,7 @@ class MySurveysPage extends Component { //Username is passed to this component f
             );
         } else {
             return (
-                this.state.surveys.map((survey, index) => <li key={index} className="buttonList"><Link className="survListButt btn btn-dark" to={`/viewsurvey/?id=${survey.id}`}>{survey.title}</Link></li>)
+                this.state.surveys.map((survey, index) => <li key={index} className="buttonList"><Link className="survListButt btn btn-dark" to={`/viewsurvey/?id=${survey.id}&user=${this.props.username}`}>{survey.title}</Link></li>)
             );
         }
     }

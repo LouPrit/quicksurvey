@@ -19,9 +19,11 @@ class ViewSurveys extends Component { //Username is passed to this component fro
 
         const params = new URLSearchParams(window.location.search); //'window.location.search' creates a string containing a '?' followed by the parameters of the URL.
         const id = params.get("id"); //ID of the survey
+        const user = params.get("user")
 
-        const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-        axios.get(`http://localhost:3001/survey/${this.props.username}/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request sending our authorization header
+        console.log(user);
+
+        axios.get(`http://localhost:3001/survey/${user}/${id}`) //Make a get request sending our authorization header
             .then(data => {
                 this.setState(
                     data.data[0]

@@ -32,9 +32,9 @@ router.post("/", checkToken, surveyController.createSurvey);
 router.get("/:user", checkToken, surveyController.getSurveys);
 
 /**
- * Handles GET requests to /survey/USERNAME/ID for specific survey retrieval - PROTECTED ROUTE
+ * Handles GET requests to /survey/USERNAME/ID for specific survey retrieval
  */
-router.get("/:user/:id", checkToken, surveyController.getSpecificSurvey);
+router.get("/:user/:id", surveyController.getSpecificSurvey);
 
 
 

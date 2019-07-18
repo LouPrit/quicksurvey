@@ -78,10 +78,7 @@ class App extends Component {
               this.state.status.loggedIn ? (<CreatePage username={this.state.status.username} {...props} />)
                 : (<Redirect to='/login' />)
             )} />
-            <Route path="/viewsurvey" render={(props) => (
-              this.state.status.loggedIn ? (<ViewSurveys username={this.state.status.username} {...props} />)
-                : (<Redirect to='/login' />)
-            )} />
+            <Route path="/viewsurvey" render={(props) => <ViewSurveys username={this.state.status.username} {...props} />} /> {/* Route used to view specific surveys */}
             <Route path="/signup" render={(props) => <SignupPage  {...props} />} /> {/*Passing props to the 'SignupPage component, uses 'render' instead of 'component'*/}
             <Route path="/login" render={(props) => <LoginPage setLogInState={this.setLogInState} {...props} />} />
             <Route path="*" component={NotFound} /> {/*Catches any routes that don't match the above and sends them to the NotFound page*/}
