@@ -22,9 +22,14 @@ const checkToken = (req, res, next) => {
 
 
 /**
- * Handles POST requests to /survey/ for survey creation - PROTECTED ROUTE
+ * Handles POST requests to /survey/create/ for survey creation - PROTECTED ROUTE
  */
-router.post("/", checkToken, surveyController.createSurvey);
+router.post("/create/", checkToken, surveyController.createSurvey);
+
+/**
+ * Handles GET requests to /survey/ for retreiving all surveys
+ */
+router.get("/", surveyController.getAllSurveys);
 
 /**
  * Handles GET requests to /survey/USERNAME for survey retrieval - PROTECTED ROUTE
@@ -35,6 +40,11 @@ router.get("/:user", checkToken, surveyController.getSurveys);
  * Handles GET requests to /survey/USERNAME/ID for specific survey retrieval
  */
 router.get("/:user/:id", surveyController.getSpecificSurvey);
+
+/** 
+ * Handles DELETE requests to /survey/delete/ID for deleting specific surveys
+ */
+router.delete("/delete/:id", checkToken, surveyController.deleteSurvey);
 
 
 

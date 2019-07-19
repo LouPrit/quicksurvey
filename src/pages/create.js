@@ -150,7 +150,7 @@ class CreatePage extends Component {
         e.preventDefault();
         
         const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-        axios.post('http://localhost:3001/survey/',  (this.state), { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
+        axios.post('http://localhost:3001/survey/create/',  (this.state), { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
         .then(reply => 
             {
             alert("Survey saved!");

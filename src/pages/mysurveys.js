@@ -14,6 +14,7 @@ class MySurveysPage extends Component { //Username is passed to this component f
         };
 
         this.SurveyList = this.SurveyList.bind(this);
+        this.deleteSurvey = this.deleteSurvey.bind(this);
     }
 
 
@@ -31,6 +32,23 @@ class MySurveysPage extends Component { //Username is passed to this component f
             .catch(error => console.log(error))
     }
 
+    deleteSurvey(e) {
+        const surveyID = e.target.attributes.getNamedItem('btnid').value;
+
+        const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
+        axios.delete(`http://localhost:3001/survey/delete/${surveyID}`, { headers: { "Authorization": `Bearer ${token}` } })
+        .then(reply => {
+            const newState = this.state.surveys.filter(survey => survey.id !== Number(surveyID));
+            this.setState({
+                surveys: newState
+            }, () => {
+                console.log("Survey deleted");
+            });
+        }
+            )
+        .catch(error => console.log(error))
+    }
+
     /**
      * Displays a list of survey titles that the user created, displays a loading screen or no surveys found screen if not.
      */
@@ -45,7 +63,7 @@ class MySurveysPage extends Component { //Username is passed to this component f
             );
         } else {
             return (
-                this.state.surveys.map((survey, index) => <li key={index} className="buttonList"><Link className="survListButt btn btn-dark" to={`/viewsurvey/?id=${survey.id}&user=${this.props.username}`}>{survey.title}</Link></li>)
+                this.state.surveys.map((survey, index) => <li key={index} className="buttonList"><Link className="survListButt btn btn-dark" to={`/viewsurvey/?id=${survey.id}&user=${this.props.username}`}>{survey.title}</Link><button className="deleteButtons btn btn-danger" onClick={this.deleteSurvey} btnid={survey.id} >Delete</button></li>)
             );
         }
     }
