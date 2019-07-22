@@ -11,6 +11,8 @@ import CreatePage from "./pages/create";
 import MySurveysPage from "./pages/mysurveys"
 import NotFound from "./pages/notfound";
 import ViewSurveys from "./pages/viewsurvey";
+import PreviewSurvey from "./pages/previewSurvey";
+import StatisticsPage from "./pages/statsPage";
 
 //components
 import MainNav from "./components/navigation"
@@ -79,6 +81,14 @@ class App extends Component {
                 : (<Redirect to='/login' />)
             )} />
             <Route path="/viewsurvey" render={(props) => <ViewSurveys username={this.state.status.username} {...props} />} /> {/* Route used to view specific surveys */}
+            <Route path="/preview" render={(props) => (
+              this.state.status.loggedIn ? (<PreviewSurvey username={this.state.status.username} {...props} />)
+                : (<Redirect to='/login' />)
+            )} /> {/* Route used to preview survey */}
+            <Route path="/stats" render={(props) => (
+              this.state.status.loggedIn ? (<StatisticsPage username={this.state.status.username} {...props} />)
+                : (<Redirect to='/login' />)
+            )} /> {/* Route used to view survey statistics */}
             <Route path="/signup" render={(props) => <SignupPage  {...props} />} /> {/*Passing props to the 'SignupPage component, uses 'render' instead of 'component'*/}
             <Route path="/login" render={(props) => <LoginPage setLogInState={this.setLogInState} {...props} />} />
             <Route path="*" component={NotFound} /> {/*Catches any routes that don't match the above and sends them to the NotFound page*/}

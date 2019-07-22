@@ -145,41 +145,76 @@ class CreatePage extends Component {
         }
     }
 
+    /**
+ * Creates the object that is sent to the database for tracking the choices users have made on different surveys
+ */
+    createStatsObject(survey) {
+
+        if (survey.id) {
+            //This is how our object starts
+            let statsObject = {
+                'id': survey.id
+            }
+
+            //Adds a new key to our 'statsObject' for each of the questions in the survey and assigns and empty object to it. e.g.  'Favourite Colour?: {}'
+            survey.questions.map(item => statsObject[item.question] = {
+            });
+
+            //Iterates through each of the questions in our survey and splits the options for each question into an array before iterating through each of the options.
+            //Each of the options are then assigned to the appropriate question inside our 'statsObject' and assigned the starting value of 0
+            survey.questions.map(item => {
+                item.options.split(', ').map(option => {
+                    statsObject[item.question][option] = 0
+                });
+            });
+
+            return (statsObject);
+        } else {
+            return null;
+        }
+
+    }
+
     //Posts the survey object to the database
     saveSurvey(e) {
         e.preventDefault();
-        
-        const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-        axios.post('http://localhost:3001/survey/create/',  (this.state), { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
-        .then(reply => 
-            {
-            alert("Survey saved!");
-            document.getElementById("myForm").reset();
-            this.setState(
-                {
-                    title: '',
-                    description: '',
-                    username: this.props.username,
-                    id: Date.now(), //Provides us with a unique ID as Date.now returns the milliseconds since January 1, 1970 00:00:00
-                    questions: [
+        const statsObject = this.createStatsObject(this.state);
+
+        if (statsObject !== null) {
+            const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
+            axios.post('http://localhost:3001/survey/create/', [this.state, statsObject], { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
+                .then(reply => {
+                    alert("Survey saved!");
+                    document.getElementById("myForm").reset();
+                    this.setState(
                         {
-                            id: 0,
-                            quesType: 'radio',
-                            question: '',
-                            options: ''
+                            title: '',
+                            description: '',
+                            username: this.props.username,
+                            id: Date.now(), //Provides us with a unique ID as Date.now returns the milliseconds since January 1, 1970 00:00:00
+                            questions: [
+                                {
+                                    id: 0,
+                                    quesType: 'radio',
+                                    question: '',
+                                    options: ''
+                                }
+                            ]
                         }
-                    ]
-                } 
-            );
-            }
-        ).catch((error) => {
-            alert("Failed");
-        });
+                    );
+                }
+                ).catch((error) => {
+                    alert("Failed, see console for more info");
+                    console.log(error)
+                });
+        } else {
+            console.log("FAILED, NO ID");
+        }
     }
 
     //The render method for the page
     render() {
-        return(
+        return (
             <div className='App-main'>
                 <h1 className='createHeading'>Create a survey</h1>
                 <div className='createSurveyMain'>

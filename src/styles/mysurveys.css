@@ -14,10 +14,10 @@
 }
 
 .survListButt {
-    width: 88%;
-    margin: 1% 0.5% 0 0;
+    width: 84.2%;
+    margin: 1% 0 0 0;
 }
 
-.deleteButtons {
-    margin: 1% 0 0 0;
+.deleteButtons, .statsButton {
+    margin: 1% 0 0 0.5%;
 }

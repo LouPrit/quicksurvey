@@ -1,10 +1,11 @@
 const surveyModel = require('../models/survey.model');
+const statsModel = require('../models/stats.model');
 const jwt = require('jsonwebtoken');
 
 const secret = "Secrets" //Used in signing of the JWT - In a live environment this should ALWAYS be stored in an environmental variable for security
 
 /**
- * Method to create a new survey
+ * Method to create a new survey, Also creates a stats object using the stats model, this is here as the stats object is sent in the POST request from front-end
  */
 exports.createSurvey = (req, res, next) => {
 
@@ -15,12 +16,14 @@ exports.createSurvey = (req, res, next) => {
             res.sendStatus(403);
         } else {
             //If token is successfully verified, we can create survey 
-            const survey = new surveyModel(req.body);
-            survey.save().then(reply => {
-                res.status(200).send(reply)
-            })
+            const survey = new surveyModel(req.body[0]); //Front end sends us 2 objects (survey and stats) so access survey object at position [0]
+            const stats = new statsModel(req.body[1]);
+            survey.save().then( //Save survey
+                stats.save().then(reply => { //Save stats
+                    res.status(200).send(reply)
+                }))
                 .catch(error => next(error));
-            console.log('SUCCESS: Survey saved');
+            console.log(`SUCCESS: Survey saved & stats created with ID: ${req.body[0].id} for User: ${req.body[0].username}`);
         }
     })
 }

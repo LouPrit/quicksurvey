@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const accountRoutes = require('./routes/accountRoutes'); //Import our routes
 const surveyRoutes = require('./routes/surveyRoutes'); //Import our routes
+const statsRoutes = require('./routes/statsRoutes'); //Import our routes
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/account', accountRoutes); //Use our account routes
 app.use('/survey', surveyRoutes); //Use our account routes
+app.use('/update', statsRoutes); //Use our account routes
 
 /**
  * Our error handler middleware, errors processed using 'next' are sent to here.

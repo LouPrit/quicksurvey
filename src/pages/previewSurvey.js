@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import '../styles/viewsurvey.css';
 import axios from 'axios';
-import $ from 'jquery';
 
 
-class ViewSurveys extends Component { //Username is passed to this component from 'App.js'
+class PreviewSurvey extends Component { //Username is passed to this component from 'App.js'
     constructor(props) {
         super(props);
 
@@ -15,7 +14,7 @@ class ViewSurveys extends Component { //Username is passed to this component fro
     }
 
     componentDidMount() {
-        document.title = "View Survey";
+        document.title = "Preview Survey";
 
         const params = new URLSearchParams(window.location.search); //'window.location.search' creates a string containing a '?' followed by the parameters of the URL.
         const id = params.get("id"); //ID of the survey
@@ -58,34 +57,9 @@ class ViewSurveys extends Component { //Username is passed to this component fro
         return (this.state.questions[props.sectionindex].options.split(', ').map((item, index) =>
             <div className="surveyDiv" key={props.sectionindex + index}>
                 <label className="surveyLabel" >{item}</label>
-                <input className="surveyInput" type={props.type} name={props.question} value={item} />
+                <input className="surveyInput" type={props.type} disabled={true} />
             </div>
         ));
-    }
-
-    /**
-     * Uses JQuery to convert the user input on the form into a JSON object that can be used.
-     * @param {*} e - Event passed from button.
-     */
-    formToJSON(e) {
-        e.preventDefault();
-
-        const id = this.state.id;
-
-        let formData = $("#surveyForm").serializeArray(); //Use JQuery to encode a set of form elements as an array of names and values.
-
-        const finalFormData = {
-            'id': id,
-            'answers': formData 
-        };
-
-        axios.patch('http://localhost:3001/update/', (finalFormData))
-        .then(x => {
-            console.log("Form submitted successfully");
-            document.getElementById('surveyForm').reset();
-            alert("Survey submitted successfully");
-        })
-        .catch(error => console.log(error));
     }
 
     render() {
@@ -93,9 +67,9 @@ class ViewSurveys extends Component { //Username is passed to this component fro
             <div className="App-main">
                 <h1 id="title">{this.state.title}</h1>
                 <p id="descript">{this.state.description}</p>
-                <form onSubmit={this.formToJSON.bind(this)} id="surveyForm">
+                <form id="surveyForm">
                     <this.section />
-                    <button type="submit" id="surveyButton" className="btn btn-dark" >Submit</button>
+                    <button id="surveyButton" className="btn btn-dark" disabled={true} >Submit</button>
                 </form>
             </div>
 
@@ -103,5 +77,5 @@ class ViewSurveys extends Component { //Username is passed to this component fro
     }
 }
 
-export default ViewSurveys;
+export default PreviewSurvey;
 
