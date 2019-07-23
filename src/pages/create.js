@@ -162,11 +162,11 @@ class CreatePage extends Component {
 
             //Iterates through each of the questions in our survey and splits the options for each question into an array before iterating through each of the options.
             //Each of the options are then assigned to the appropriate question inside our 'statsObject' and assigned the starting value of 0
-            survey.questions.map(item => {
-                item.options.split(', ').map(option => {
+            survey.questions.map(item =>
+                item.options.split(', ').map(option =>
                     statsObject[item.question][option] = 0
-                });
-            });
+                )
+            );
 
             return (statsObject);
         } else {

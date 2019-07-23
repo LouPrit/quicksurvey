@@ -5,7 +5,7 @@ import decode from 'jwt-decode';
 
 //pages
 import SignupPage from "./pages/signup";
-import MainPage from "./pages/index";
+import MainPage from "./pages/home";
 import LoginPage from "./pages/login";
 import CreatePage from "./pages/create";
 import MySurveysPage from "./pages/mysurveys"

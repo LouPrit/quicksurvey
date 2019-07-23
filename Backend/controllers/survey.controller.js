@@ -84,9 +84,13 @@ exports.deleteSurvey = (req, res, next) => {
             //If token is successfully verified, we can delete survey
             surveyModel.deleteOne({ id: survID }, function (err, reply) {
                 if (err) return next(err);
-                res.status(200).send(reply);
+                console.log(`SUCCESS: Survey deleted with ID ${survID}`);
+                statsModel.deleteOne({ id: survID }, function (err, reply) {
+                    if (err) return next(err);
+                    res.status(200).send(reply);
+                    console.log(`SUCCESS: Stats deleted with ID ${survID}`);
+                });
             });
-            console.log(`SUCCESS: Survey deleted with ID ${survID}`);
         }
     })
 };
