@@ -4,6 +4,7 @@
   "description": "Backend to QuickSurvey",
   "main": "index.js",
   "scripts": {
+	"start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Louis Pritchard",
