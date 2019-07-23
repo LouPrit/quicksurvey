@@ -15,7 +15,7 @@ const database = 'master';
  * Create connection to Database
  */
 console.log(`Attempting to connect to the database...`);
-mongoose.connect(`mongodb://${server}/${database}`, { useNewUrlParser: true })
+mongoose.connect(`mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz`, { useNewUrlParser: true })
     .then(() => console.log("Connected to master database"))
     .catch(error => {
         console.log(`Couldn't connect to the database: \n${error}`);

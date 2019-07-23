@@ -6,6 +6,11 @@ const surveyRoutes = require('./routes/surveyRoutes'); //Import our routes
 const statsRoutes = require('./routes/statsRoutes'); //Import our routes
 
 const app = express();
+const PORT = process.env.PORT || 3001;
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
 
 app.use(cors());
 app.use(bodyParser.json()); // support json encoded bodies
@@ -13,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/account', accountRoutes); //Use our account routes
 app.use('/survey', surveyRoutes); //Use our account routes
 app.use('/update', statsRoutes); //Use our account routes
+
 
 /**
  * Our error handler middleware, errors processed using 'next' are sent to here.
@@ -24,6 +30,6 @@ app.use(function (err, req, res, next) {
      ${err}`);
 })
 
-app.listen(3001, () => {
-    console.log('Server listening on port: ', 3001);
+app.listen(PORT, () => {
+    console.log('Server listening on port: ', PORT);
 });
