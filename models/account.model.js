@@ -7,7 +7,7 @@ const SALT_WORK_FACTOR = 10;
 /**
  * Connection settings
  */
-const server = 'mongodb://localhost:27017/master' || 'mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz';
+const server = 'mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz';
 
 
 /**
