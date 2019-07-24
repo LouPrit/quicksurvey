@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/viewsurvey.css';
 import axios from 'axios';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class PreviewSurvey extends Component { //Username is passed to this component from 'App.js'
     constructor(props) {
@@ -20,7 +21,7 @@ class PreviewSurvey extends Component { //Username is passed to this component f
         const id = params.get("id"); //ID of the survey
         const user = params.get("user")
 
-        axios.get(`http://localhost:3001/survey/${user}/${id}`) //Make a get request sending our authorization header
+        axios.get(`${URL}/survey/${user}/${id}`) //Make a get request sending our authorization header
             .then(data => {
                 this.setState(
                     data.data[0]

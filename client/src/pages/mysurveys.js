@@ -3,6 +3,7 @@ import '../styles/mysurveys.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class MySurveysPage extends Component { //Username is passed to this component from 'App.js'
     constructor(props) {
@@ -22,7 +23,7 @@ class MySurveysPage extends Component { //Username is passed to this component f
         document.title = "My Surveys";
 
         const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-        axios.get(`http://localhost:3001/survey/${this.props.username}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request sending our authorization header
+        axios.get(`${URL}/survey/${this.props.username}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request sending our authorization header
             .then(reply => this.setState(
                 {
                     retrievedData: true,
@@ -36,7 +37,7 @@ class MySurveysPage extends Component { //Username is passed to this component f
         const surveyID = e.target.attributes.getNamedItem('btnid').value;
 
         const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-        axios.delete(`http://localhost:3001/survey/delete/${surveyID}`, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.delete(`${URL}/survey/delete/${surveyID}`, { headers: { "Authorization": `Bearer ${token}` } })
         .then(reply => {
             const newState = this.state.surveys.filter(survey => survey.id !== Number(surveyID));
             this.setState({

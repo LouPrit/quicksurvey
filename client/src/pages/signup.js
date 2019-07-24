@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styles/signup.css';
 import axios from 'axios';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+
 class SignupPage extends Component {
     constructor(props) {
         super(props);
@@ -39,7 +41,7 @@ class SignupPage extends Component {
     */
     createAccount(e) {
         e.preventDefault(); //Prevent the form from refreshing page when submit is pressed
-        axios.post('http://localhost:3001/account/', (this.state.accForm))
+        axios.post(`${URL}/account/`, (this.state.accForm))
             .then((res) => {
                 let reply = res.data;
 
@@ -63,7 +65,7 @@ class SignupPage extends Component {
                     }
                 });
                 alert("Account successfully created");
-                window.location.assign("http://localhost:3000/login");
+                window.location.assign(`${URL}/login`);
             }
             })
             .catch((error) => {

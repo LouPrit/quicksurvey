@@ -3,6 +3,7 @@ import '../styles/viewsurvey.css';
 import axios from 'axios';
 import $ from 'jquery';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class ViewSurveys extends Component { //Username is passed to this component from 'App.js'
     constructor(props) {
@@ -21,7 +22,7 @@ class ViewSurveys extends Component { //Username is passed to this component fro
         const id = params.get("id"); //ID of the survey
         const user = params.get("user")
 
-        axios.get(`http://localhost:3001/survey/${user}/${id}`) //Make a get request sending our authorization header
+        axios.get(`${URL}/survey/${user}/${id}`) //Make a get request sending our authorization header
             .then(data => {
                 this.setState(
                     data.data[0]
@@ -79,7 +80,7 @@ class ViewSurveys extends Component { //Username is passed to this component fro
             'answers': formData 
         };
 
-        axios.patch('http://localhost:3001/update/', (finalFormData))
+        axios.patch(`${URL}/update/`, (finalFormData))
         .then(x => {
             console.log("Form submitted successfully");
             document.getElementById('surveyForm').reset();

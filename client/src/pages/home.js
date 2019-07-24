@@ -3,6 +3,7 @@ import '../styles/home.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class AllSurveysPage extends Component { 
     constructor(props) {
@@ -20,7 +21,7 @@ class AllSurveysPage extends Component {
     componentDidMount() {
         document.title = "All Surveys";
 
-        axios.get(`http://localhost:3001/survey/`) //Make a get request for all surveys
+        axios.get(`${URL}/survey/`) //Make a get request for all surveys
             .then(reply => this.setState(
                 {
                     retrievedData: true,

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styles/stats.css';
 import axios from 'axios';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+
 let statsArr = [];
 
 let quickStyle = {
@@ -37,7 +39,7 @@ class StatisticsPage extends Component {
 
 
         const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-        axios.get(`http://localhost:3001/update/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request for survey stats
+        axios.get(`${URL}/update/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) //Make a get request for survey stats
             .then(reply => this.setState(
                 reply.data[0]
             ))

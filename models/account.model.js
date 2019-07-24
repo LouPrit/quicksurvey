@@ -7,7 +7,7 @@ const SALT_WORK_FACTOR = 10;
 /**
  * Connection settings
  */
-const server = 'mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz';
+let server = (process.env.NODE_ENV === 'production') ? 'mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz' : 'mongodb://localhost:27017/master';
 
 
 /**

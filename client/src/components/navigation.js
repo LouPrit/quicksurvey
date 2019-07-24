@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+
 function MainNav(props) {
     if (props.logState.loggedIn) {
         return (
@@ -69,7 +71,7 @@ function MainNav(props) {
 
 function logout() {
     localStorage.removeItem('qs_auth_token');
-    window.location.assign("http://localhost:3000/login");
+    window.location.assign(`${URL}/login`);
 }
 
 export default MainNav;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styles/create.css';
 import axios from 'axios';
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+
 class CreatePage extends Component {
     constructor(props) {
         super(props);
@@ -182,7 +184,7 @@ class CreatePage extends Component {
 
         if (statsObject !== null) {
             const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
-            axios.post('http://localhost:3001/survey/create/', [this.state, statsObject], { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
+            axios.post(`${URL}/survey/create/`, [this.state, statsObject], { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
                 .then(reply => {
                     alert("Survey saved!");
                     document.getElementById("myForm").reset();

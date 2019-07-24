@@ -3,6 +3,7 @@ import '../styles/login.css';
 import axios from 'axios';
 import decode from 'jwt-decode'
 
+let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class LoginPage extends Component {
 
     login(e) {
         e.preventDefault();
-        axios.get(`http://localhost:3001/account/${this.state.loginForm.username}/${this.state.loginForm.password}`)
+        axios.get(`${URL}/account/${this.state.loginForm.username}/${this.state.loginForm.password}`)
             .then(reply => {
                 if (reply.data.token) { //If token exists in reply
                     localStorage.setItem('qs_auth_token', reply.data.token); //Store token in local storage with the name 'qs_auth_token'
@@ -63,7 +64,7 @@ class LoginPage extends Component {
                                 password: ''
                             }
                         });
-                        window.location.assign("http://localhost:3000/");
+                        window.location.assign(`${URL}/`);
                     } else {
                         console.log("Error: Looks like token was invalid");
                     }
