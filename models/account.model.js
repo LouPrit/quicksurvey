@@ -7,15 +7,14 @@ const SALT_WORK_FACTOR = 10;
 /**
  * Connection settings
  */
-const server = 'localhost:27017';
-const database = 'master';
+const server = 'mongodb://localhost:27017/master' || 'mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz';
 
 
 /**
  * Create connection to Database
  */
 console.log(`Attempting to connect to the database...`);
-mongoose.connect(`mongodb://user:Password123@ds353957.mlab.com:53957/heroku_n6mq2fnz`, { useNewUrlParser: true })
+mongoose.connect(server, { useNewUrlParser: true })
     .then(() => console.log("Connected to master database"))
     .catch(error => {
         console.log(`Couldn't connect to the database: \n${error}`);
