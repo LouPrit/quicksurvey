@@ -3,7 +3,7 @@ import '../styles/viewsurvey.css';
 import axios from 'axios';
 import $ from 'jquery';
 
-let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+let URL = (process.env.NODE_ENV === 'production') ? 'https://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class ViewSurveys extends Component { //Username is passed to this component from 'App.js'
     constructor(props) {

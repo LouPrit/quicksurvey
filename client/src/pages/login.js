@@ -3,7 +3,8 @@ import '../styles/login.css';
 import axios from 'axios';
 import decode from 'jwt-decode'
 
-let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+let URL = (process.env.NODE_ENV === 'production') ? 'https://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+let RedirectURL = (process.env.NODE_ENV === 'production') ? 'https://quicksurvey-react.herokuapp.com' : 'http://localhost:3000';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class LoginPage extends Component {
                                 password: ''
                             }
                         });
-                        window.location.assign(`${URL}/`);
+                        window.location.assign(`${RedirectURL}/`);
                     } else {
                         console.log("Error: Looks like token was invalid");
                     }

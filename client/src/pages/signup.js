@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/signup.css';
 import axios from 'axios';
 
-let URL = (process.env.NODE_ENV === 'production') ? 'http://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
+let URL = (process.env.NODE_ENV === 'production') ? 'https://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
 
 class SignupPage extends Component {
     constructor(props) {
