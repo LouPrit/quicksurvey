@@ -1,0 +1,19 @@
+.statsStyle {
+    text-align: center;
+    list-style: none;
+    padding: 10px;
+    margin: auto;
+    width: 49vw;
+    border: solid;
+    border-width: 1.5px;
+    border-radius: 10px;
+}
+
+.statsTitle {
+    padding: 10px 0 10px 0;
+}
+
+.buttonStyle {
+    margin-top: 2em;
+    width: 100%;
+}

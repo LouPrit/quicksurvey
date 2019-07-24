@@ -6,13 +6,6 @@ let URL = (process.env.NODE_ENV === 'production') ? 'https://quicksurvey-react.h
 
 let statsArr = [];
 
-let quickStyle = {
-    'textAlign': 'center',
-    'listStyle': 'none',
-    'padding': 0,
-    'margin': 0
-}
-
 class StatisticsPage extends Component {
     constructor(props) {
         super(props);
@@ -69,12 +62,18 @@ class StatisticsPage extends Component {
         );
     }
 
+    test() {
+        alert(`Check browser console logs - Press F12 and select 'console'.`);
+        console.log(JSON.stringify(statsArr));
+    }
+
     render() {
         return (
-            <div className="App-main">
-                <h1>Survey Statistics</h1>
-                <ul style={quickStyle}>
+            <div className='App-main'>
+                <h1 className='statsTitle'>Survey Statistics</h1>
+                <ul className='statsStyle'>
                     <this.MainBit />
+                    <input type="button" value="Generate JSON" className='buttonStyle btn btn-dark' onClick={this.test.bind(this)} />
                 </ul>
             </div>
 
