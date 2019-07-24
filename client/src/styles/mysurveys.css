@@ -2,19 +2,23 @@
     padding: 0 0.5% 0.5% 0.5%;
     margin: 0.65rem auto 0 auto;
     min-height: 20vh;
-    width: 49vw;
+    min-width: 810px;
     border: solid;
     border-width: 1.5px;
     border-radius: 10px;
 }
 
 .buttonList {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
     list-style: none;
     text-align: center;
 }
 
 .survListButt {
-    width: 84.2%;
+    max-width: 82.2%;
+    width: 100%;
     margin: 1% 0 0 0;
 }
 
