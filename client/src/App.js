@@ -45,7 +45,7 @@ class App extends Component {
     if (token) {  //If we found a token
       const decoded = decode(token); //Decode our token
       if (decoded.exp > Date.now() / 1000) { //If the token expiry date is greater than current time/date the token is valid
-        return decoded.username;
+        return decoded.username.toLowerCase();
       } else {  //Otherwise it's not valid
         return false;
       }

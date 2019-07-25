@@ -1,8 +1,9 @@
 .statsStyle {
     text-align: center;
     list-style: none;
-    padding: 10px;
+    padding: 0 0.5% 0.5% 0.5%;
     margin: auto;
+    min-width: 50.62em;
     width: 49vw;
     border: solid;
     border-width: 1.5px;
