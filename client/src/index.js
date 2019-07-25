@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'es6-shim';
+import 'react-app-polyfill/ie11';
+import 'url-search-params-polyfill';
+import "es6-promise/auto";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
