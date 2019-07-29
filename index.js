@@ -8,6 +8,13 @@ const statsRoutes = require('./routes/statsRoutes'); //Import our routes
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+/**
+ * By enabling the "trust proxy" setting via app.enable('trust proxy'), 
+ * Express will have knowledge that it's sitting behind a proxy and that the X-Forwarded-* header fields may be trusted, which otherwise may be easily spoofed.
+ * This allows the client IP address/s to be accessed via req.ip or req.ips.
+ */
+app.set('trust proxy', true);
+
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
   app.use(express.static('client/build'));

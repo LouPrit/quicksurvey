@@ -77,16 +77,19 @@ class ViewSurveys extends Component { //Username is passed to this component fro
 
         const finalFormData = {
             'id': id,
-            'answers': formData 
+            'answers': formData
         };
 
         axios.patch(`${URL}/update/`, (finalFormData))
-        .then(x => {
-            console.log("Form submitted successfully");
-            document.getElementById('surveyForm').reset();
-            alert("Survey submitted successfully");
-        })
-        .catch(error => console.log(error));
+            .then(x => {
+                if (x.data.completed) {
+                    alert("FAILED: You have already completed this survey");
+                } else {
+                    document.getElementById('surveyForm').reset();
+                    alert("SUCCESS: Survey submitted successfully");
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     render() {

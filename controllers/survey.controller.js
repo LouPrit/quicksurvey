@@ -36,7 +36,6 @@ exports.getAllSurveys = (req, res, next) => {
         if (err) return next(err);
         res.status(200).send(surveys); //surveys will either contain a list of surveys if they were found, or will send an empty array.
     });
-    console.log('SUCCESS: Surveys retrieved');
 }
 
 /**
@@ -54,7 +53,6 @@ exports.getSurveys = (req, res, next) => {
                 if (err) return next(err);
                 res.status(200).send(surveys); //surveys will either contain a list of surveys if they were found, or will send an empty array.
             });
-            console.log('SUCCESS: Surveys retrieved');
         }
     })
 };
@@ -67,7 +65,6 @@ exports.getSpecificSurvey = (req, res, next) => {
         if (err) return next(err);
         res.status(200).send(survey); //surveys will either contain a list of surveys if they were found, or will send an empty array.
     });
-    console.log('SUCCESS: Survey retrieved');
 }
 
 /**
