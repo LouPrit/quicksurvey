@@ -65,31 +65,44 @@ class ViewSurveys extends Component { //Username is passed to this component fro
     }
 
     /**
+     * Created a cookie based on values passed and saves it
+     * @param  name    - name of cookie (survey ID)
+     * @param  value   - Value of cookie, this is set to 'true'
+     * @param  expires - Amount of days before cookie expires
+     */
+    setCookie(name, value, expires) {
+        var date = new Date();
+        date.setTime(date.getTime() + (expires * 24 * 60 * 60 * 1000));
+        var expireDate = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expireDate + ";path=/";
+    }
+
+    /**
      * Uses JQuery to convert the user input on the form into a JSON object that can be used.
      * @param {*} e - Event passed from button.
      */
     formToJSON(e) {
         e.preventDefault();
-
         const id = this.state.id;
 
-        let formData = $("#surveyForm").serializeArray(); //Use JQuery to encode a set of form elements as an array of names and values.
+        if (document.cookie.indexOf(`${id}=`) >= 0) { //If a cookie with the key that matches our survey ID is found, the survey has already been completed
+            alert("FAILED: You have already completed this survey");
+        } else {
+            let formData = $("#surveyForm").serializeArray(); //Use JQuery to encode a set of form elements as an array of names and values.
 
-        const finalFormData = {
-            'id': id,
-            'answers': formData
-        };
+            const finalFormData = {
+                'id': id,
+                'answers': formData
+            };
 
-        axios.patch(`${URL}/update/`, (finalFormData))
-            .then(x => {
-                if (x.data.completed) {
-                    alert("FAILED: You have already completed this survey");
-                } else {
+            axios.patch(`${URL}/update/`, (finalFormData))
+                .then(x => {
+                    this.setCookie(id, true, 90);
                     document.getElementById('surveyForm').reset();
                     alert("SUCCESS: Survey submitted successfully");
-                }
-            })
-            .catch(error => console.log(error));
+                })
+                .catch(error => console.log(error));
+        }
     }
 
     render() {
