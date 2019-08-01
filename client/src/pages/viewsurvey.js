@@ -118,10 +118,10 @@ class ViewSurveys extends Component { //Username is passed to this component fro
                 <p id="descript">{this.state.description}</p>
                 <form onSubmit={this.formToJSON.bind(this)} id="surveyForm">
                     <this.section />
+                    <button type="submit" id="surveyButton" className="btn btn-dark" disabled >Submit</button>
                 </form>
                 <div id="captchaSubmit">
-                    <ReCAPTCHA className="CAPTCHA" sitekey="6LdC1LAUAAAAABECAj8NxM1Np9cO9ol_B4RJ8vAT" onChange={this.onChange} disabled />
-                    <button type="submit" id="surveyButton" className="btn btn-dark" form="surveyForm" disabled >Submit</button>
+                    <ReCAPTCHA className="CAPTCHA" sitekey="6Lfd47AUAAAAAJ-C5L1RJOKvueiSF19ki487n3Up" onChange={this.onChange} disabled />
                 </div>
             </div>
 
