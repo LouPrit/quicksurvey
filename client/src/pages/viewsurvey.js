@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/viewsurvey.css';
 import axios from 'axios';
+import ReCAPTCHA from "react-google-recaptcha";
 import $ from 'jquery';
 
 let URL = (process.env.NODE_ENV === 'production') ? 'https://quicksurvey-react.herokuapp.com' : 'http://localhost:3001';
@@ -105,6 +106,11 @@ class ViewSurveys extends Component { //Username is passed to this component fro
         }
     }
 
+    //Once the CAPTCHA has been completed we enable the submit button
+    onChange() {
+        document.getElementById('surveyButton').disabled = false;
+    }
+
     render() {
         return (
             <div className="App-main">
@@ -112,8 +118,11 @@ class ViewSurveys extends Component { //Username is passed to this component fro
                 <p id="descript">{this.state.description}</p>
                 <form onSubmit={this.formToJSON.bind(this)} id="surveyForm">
                     <this.section />
-                    <button type="submit" id="surveyButton" className="btn btn-dark" >Submit</button>
                 </form>
+                <div id="captchaSubmit">
+                    <ReCAPTCHA className="CAPTCHA" sitekey="6LdC1LAUAAAAABECAj8NxM1Np9cO9ol_B4RJ8vAT" onChange={this.onChange} disabled />
+                    <button type="submit" id="surveyButton" className="btn btn-dark" form="surveyForm" disabled >Submit</button>
+                </div>
             </div>
 
         );

@@ -57,6 +57,12 @@
     text-align: center;
 }
 
+#captchaSubmit  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #surveyButton {
     padding: 10px;
     margin: 0.5vh;
