@@ -9,22 +9,25 @@
 .surveySection {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     border: solid;
     height: 100%; 
-    min-width: 50.62em;
-    width: 50%;
+    min-width: 30.62em;
+    width: 40%;
     margin: 1.1% auto 1.1% auto;
     border-radius: 7px;
 }
 
 .sectionTitle {
-    margin: 1.5rem 0 1.7rem 0;
+    margin: 0.5rem 0 0.5rem 2rem;
+}
+
+.surveyInput {
+    margin-left: 2rem;
 }
 
 .formSection {
     width: 85%;
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -35,9 +38,6 @@
     margin: 1vh;
 }
 
-.surveyInput {
-    height: 4vh;
-}
 
 #title {
     padding-top: 10px;
@@ -49,7 +49,7 @@
 }
 
 .surveyLabel {
-    margin: 0 1rem 0 0;
+    margin: 0 0 0 1rem;
     font-weight: bold;
 }
 

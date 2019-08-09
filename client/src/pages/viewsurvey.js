@@ -59,8 +59,8 @@ class ViewSurveys extends Component { //Username is passed to this component fro
     CreateOptions(props) {
         return (this.state.questions[props.sectionindex].options.split(', ').map((item, index) =>
             <div className="surveyDiv" key={props.sectionindex + index}>
-                <label className="surveyLabel" >{item}</label>
                 <input className="surveyInput" type={props.type} name={props.question} value={item} />
+                <label className="surveyLabel" >{item}</label>
             </div>
         ));
     }
