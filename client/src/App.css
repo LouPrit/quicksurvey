@@ -78,6 +78,50 @@ p {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
-
+@media only screen and (max-width: 650px) {
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    height: 26vh;
+    margin: 0;
+    text-align: center;
+    }
+    .App-nav {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      justify-content: flex-start;
+      min-width: 0;
+      width: auto;
+    }
+    
+    .App-nav-login {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 0;
+      margin: 0;
+      width: auto;
+    }
+    .App-nav > li, .App-nav-login > li {
+      display: inline;
+      list-style: none;
+      padding: 0;
+    }
+    .signupLi {
+      margin: 0;
+    }
+    .App-header-background {
+      display: flex;
+      justify-content: center;
+    }
+    .navLinksDiv {
+      width: 200px;
+      height: 75px;
+      overflow-y: auto;
+    }
+    
 }
