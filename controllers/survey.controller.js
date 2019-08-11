@@ -18,6 +18,8 @@ exports.createSurvey = (req, res, next) => {
             //If token is successfully verified, we can create survey 
             const survey = new surveyModel(req.body[0]); //Front end sends us 2 objects (survey and stats) so access survey object at position [0]
             const stats = new statsModel(req.body[1]);
+            console.log(JSON.stringify(req.body[1]));
+            console.log(JSON.stringify(stats));
             survey.save().then( //Save survey
                 stats.save().then(reply => { //Save stats
                     res.status(200).send(reply)

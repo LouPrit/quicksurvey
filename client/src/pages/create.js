@@ -109,11 +109,11 @@ class CreatePage extends Component {
                 </div>
                 <div id='quesDiv'>
                     <label id='#quesLabel' className="boldLabel">Question: </label>
-                    <input type='text' id={id} name="question" className='quesInput' placeholder='Question' onChange={this.textChanged} required={true} />
+                    <input type='text' id={id} name="question" pattern="[^$\.]+" className='quesInput' placeholder='Question' onChange={this.textChanged} required={true} />
                 </div>
                 <div id='optionsDiv'>
                     <label id='#optionsLabel' className="boldLabel">Options:</label>
-                    <input type='text' id={id} name="options" className='optionsInput' placeholder='Comma seperated e.g. (Option 1, Option 2)' onChange={this.textChanged} required={true} />
+                    <input type='text' id={id} name="options" pattern="[^$\.]+" className='optionsInput' placeholder='Comma seperated e.g. (Option 1, Option 2)' onChange={this.textChanged} required={true} />
                 </div>
             </li>
         );
@@ -181,7 +181,6 @@ class CreatePage extends Component {
     saveSurvey(e) {
         e.preventDefault();
         const statsObject = this.createStatsObject(this.state);
-
         if (statsObject !== null) {
             const token = localStorage.getItem("qs_auth_token"); //Find our token and assign to const 'token'
             axios.post(`${URL}/survey/create/`, [this.state, statsObject], { headers: { "Authorization": `Bearer ${token}` } }) //Make a post request sending our data and authorization header
@@ -223,11 +222,11 @@ class CreatePage extends Component {
                     <form id="myForm" className='createSurveyForm' onSubmit={this.saveSurvey}>
                         <div id='titleDiv'>
                             <label id='#titleLabel' className="boldLabel">Survey title:</label>
-                            <input type='text' name="title" id='titleInput' placeholder='Survey Title' onChange={this.textChanged} required={true} />
+                            <input type='text' name="title" id='titleInput' pattern="[^$\.]+" placeholder='Survey Title' onChange={this.textChanged} required={true} />
                         </div>
                         <div id='descriptionDiv'>
                             <label id='#descriptionLabel' className="boldLabel">Description:</label>
-                            <input type='text' name="description" id='descriptionInput' placeholder='Description' onChange={this.textChanged} required={true} />
+                            <input type='text' name="description" id='descriptionInput' pattern="[^$\.]+" placeholder='Description' onChange={this.textChanged} required={true} />
                         </div>
                         <div className="questionDiv">
                             <a href=' ' onClick={this.addQuestion} className="shrinkAnchorPlus">
