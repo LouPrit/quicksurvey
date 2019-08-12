@@ -34,3 +34,9 @@ h1, h2 {
 #lastName {
     width: 45%;
 }
+
+@media only screen and (max-width: 650px) {
+    .signupForm {
+        width: 95vw;
+    }
+}
