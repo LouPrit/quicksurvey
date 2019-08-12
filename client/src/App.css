@@ -15,16 +15,16 @@ width: 66vw;
 min-width: 550px;
 height: 10vh;
 margin: auto;
+color: white;
 }
 
 .App-header-background {
-  background-color: #a5d6a7;
+  background-color: #4caf50;
 }
 
 .App-title {
 font-size: 2em;
-font-weight: bold
-
+font-weight: bold;
 }
 
 .App-nav {
@@ -56,13 +56,13 @@ font-weight: bold
 }
 
 .link {
-  color: black;
+  color: white;
 }
 
 .App-main {
   min-height: 90vh;
   margin: auto;
-  background-color: #d7ffd9;
+  background-color: #e4f3e5;
 }
 
 p {
@@ -84,7 +84,7 @@ p {
     flex-direction: column;
     align-items: center;
     min-width: 0;
-    height: 26vh;
+    height: auto;
     margin: 0;
     text-align: center;
     }

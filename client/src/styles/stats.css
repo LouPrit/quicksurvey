@@ -18,3 +18,10 @@
     margin-top: 2em;
     width: 100%;
 }
+
+@media only screen and (max-width: 650px) {
+    .statsStyle {
+        min-width: 0;
+        width: 100vw;
+    }
+}

@@ -40,14 +40,13 @@
     .buttonList {
         margin: 0;
         padding: 0;
-        white-space: nowrap;
+        white-space: unset;
         list-style: none;
-        text-align: center;
+        text-align: left;
     }
-    
     .survListButt {
-        max-width: 0;
-        width: 0;
+        width: 60%;
         margin: 1% 0 0 0;
     }
+
 }

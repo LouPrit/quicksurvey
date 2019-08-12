@@ -88,3 +88,27 @@
     font-weight: bold;
     margin: 0;
 }
+
+@media only screen and (max-width: 650px) {
+    .createSurveyMain {
+        min-width: 0;
+        width: 100vw;
+    }
+    
+    #titleInput ,.optionsInput, #descriptionInput, .quesInput {
+        width: 95vw;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .insideQuestionDiv {
+        min-width: 0;
+        width: 100vw;
+    }
+
+    .questionType {
+        margin: 0.75rem auto 0 auto;
+        width: 95vw;
+    }
+    
+}
